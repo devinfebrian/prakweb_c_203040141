@@ -23,10 +23,9 @@ if (isset($_POST['cari'])) {
 
 <body>
   <div class="container" align="center">
-    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
     <h3>Daftar Novel</h3>
 
-    <a href="tambah.php">Tambah Data Buku</a>
+    <a href="tambah.php">Tambah Data Novel</a>
     <br><br>
 
     <form method="post" action="">
@@ -38,34 +37,33 @@ if (isset($_POST['cari'])) {
     <table border="5" cellpadding="15" cellspacing="0" style="background-color: white;">
       <thead>
         <tr>
-          <th style="background-color: salmon;">Id Buku</th>
-          <th style="background-color: salmon;">Nama Buku</th>
-          <th style="background-color: salmon;">Nama Pengarang</th>
-          <th style="background-color: salmon;">Gambar Buku</th>
+          <th style="background-color: white;">Id Buku</th>
+          <th style="background-color: white;">Nama Buku</th>
+          <th style="background-color: white;">Nama Pengarang</th>
+          <th style="background-color: white;">Gambar Buku</th>
         </tr>
       </thead>
 
       <?php if (empty($buku)) : ?>
         <tr>
           <td colspan="4">
-            <p style="color: red; font-style: italic;">Data buku tidak ditemukan</p>
+            <p style="color: red; font-style: italic;">Data novel tidak ditemukan</p>
           </td>
         </tr>
       <?php endif; ?>
 
-      <?php $i = 1;
+      <?php
       foreach ($buku as $b) : ?>
         <tbody>
           <tr>
-            <td><?= $i++; ?></td>
             <th scope="row"><?= $b['id_buku']; ?></th>
             <td><?= $b['nama_buku']; ?></td>
             <td><?= $b['nama_pengarang']; ?></td>
             <td><img src="img/<?= $b['gambar_buku']; ?>" width="70"></td>
             <td>
-              <a class="waves-effect waves-light btn-small" a href="ubah.php?id=<?= $m['id_Buku']; ?>">|<i class="material-icons right">create</i>|</a>
+              <a class="waves-effect waves-light btn-small" a href="ubah.php?id=<?= $m['id_buku']; ?>">|<i class="material-icons right">create</i>|</a>
 
-              <a class="waves-effect waves-light btn-small" a href="hapus.php?id=<?= $m['id_Buku']; ?>">|<i class="material-icons right">delete_forever</i>|</a>
+              <a class="waves-effect waves-light btn-small" a href="hapus.php?id=<?= $m['id_buku']; ?>">|<i class="material-icons right">delete_forever</i>|</a>
             </td>
         </tbody>
       <?php endforeach; ?>

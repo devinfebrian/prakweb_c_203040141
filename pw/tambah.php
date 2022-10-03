@@ -19,35 +19,23 @@ if (isset($_POST['tambah'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tambah Data Buku</title>
+  <title>Tambah Data Novel</title>
 </head>
 
 <body>
-  <h3>Form Tambah Data Buku</h3>
+  <h3>Form Tambah Data Novel</h3>
   <form action="" method="POST">
     <ul>
       <li>
         <label>
           judul_Buku :
-          <input type="text" name="judul_Buku" autofocus required>
-        </label>
-      </li>
-      <li>
-        <label>
-          penerbit :
-          <input type="text" name="penerbit" required>
+          <input type="text" name="nama_buku" autofocus required>
         </label>
       </li>
       <li>
         <label>
           pengarang :
           <input type="text" name="pengarang" required>
-        </label>
-      </li>
-      <li>
-        <label>
-          tahun :
-          <input type="text" name="tahun" required>
         </label>
       </li>
       <li>
