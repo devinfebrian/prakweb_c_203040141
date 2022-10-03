@@ -1,18 +1,11 @@
 <?php
-// koneksi DB
-$conn = mysqli_connect('localhost', 'root', '', 'prakweb_c_203040141_pw');
+require 'functions.php';
+$buku = query("SELECT * FROM buku");
 
-// query isi tabel
-$result = mysqli_query($conn, "SELECT * FROM buku");
-
-// data ke array
-$rows = [];
-while ($row = mysqli_fetch_assoc($result)) {
-  $rows[] = $row;
+if (isset($_POST['cari'])) {
+  $buku = cari($_POST['keyword']);
 }
 
-// tampung
-$buku = $rows;
 ?>
 
 <!DOCTYPE html>
@@ -25,29 +18,59 @@ $buku = $rows;
   <title>Daftar Novel</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-  <h3>Daftar Novel</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Id Buku</th>
-        <th scope="col">Nama Buku</th>
-        <th scope="col">Nama Pengarang</th>
-        <th scope="col">Gambar Buku</th>
-      </tr>
-    </thead>
-    <?php foreach ($buku as $b) : ?>
-      <tbody>
+  <div class="container" align="center">
+    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    <h3>Daftar Novel</h3>
+
+    <a href="tambah.php">Tambah Data Buku</a>
+    <br><br>
+
+    <form method="post" action="">
+      <input type="text" name="keyword" size="50" placeholder="masukkan keywoard pencarian" autocomplete="off" autofocus>
+      <button type="submit" name="cari">Cari!</button>
+    </form>
+    <br>
+
+    <table border="5" cellpadding="15" cellspacing="0" style="background-color: white;">
+      <thead>
         <tr>
-          <th scope="row"><?= $b['id_buku']; ?></th>
-          <td><?= $b['nama_buku']; ?></td>
-          <td><?= $b['nama_pengarang']; ?></td>
-          <td><img src="img/<?= $b['gambar_buku']; ?>" width="70"></td>
-      </tbody>
-    <?php endforeach; ?>
-  </table>
+          <th style="background-color: salmon;">Id Buku</th>
+          <th style="background-color: salmon;">Nama Buku</th>
+          <th style="background-color: salmon;">Nama Pengarang</th>
+          <th style="background-color: salmon;">Gambar Buku</th>
+        </tr>
+      </thead>
+
+      <?php if (empty($buku)) : ?>
+        <tr>
+          <td colspan="4">
+            <p style="color: red; font-style: italic;">Data buku tidak ditemukan</p>
+          </td>
+        </tr>
+      <?php endif; ?>
+
+      <?php $i = 1;
+      foreach ($buku as $b) : ?>
+        <tbody>
+          <tr>
+            <td><?= $i++; ?></td>
+            <th scope="row"><?= $b['id_buku']; ?></th>
+            <td><?= $b['nama_buku']; ?></td>
+            <td><?= $b['nama_pengarang']; ?></td>
+            <td><img src="img/<?= $b['gambar_buku']; ?>" width="70"></td>
+            <td>
+              <a class="waves-effect waves-light btn-small" a href="ubah.php?id=<?= $m['id_Buku']; ?>">|<i class="material-icons right">create</i>|</a>
+
+              <a class="waves-effect waves-light btn-small" a href="hapus.php?id=<?= $m['id_Buku']; ?>">|<i class="material-icons right">delete_forever</i>|</a>
+            </td>
+        </tbody>
+      <?php endforeach; ?>
+    </table>
+  </div>
 </body>
 
 </html>
